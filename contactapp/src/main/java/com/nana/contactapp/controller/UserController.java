@@ -1,5 +1,7 @@
 package com.nana.contactapp.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +27,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String handleLogin(@ModelAttribute("command") LoginCommand command, Model m) {
+	public String handleLogin(@ModelAttribute("command") LoginCommand command, Model m, HttpSession session) {
 		try {
 			User loggedInUser = userService.login(command.getLoginName(), command.getPassword());
 
@@ -35,8 +37,10 @@ public class UserController {
 			} else {
 				if (loggedInUser.getRole() != null) {
 					if (loggedInUser.getRole().equals(UserService.ROLE_ADMIN)) {
+						addUserInSession(loggedInUser, session); /* session logedin */
 						return "redirect:admin/dashboard";
 					} else if (loggedInUser.getRole().equals(UserService.ROLE_USER)) {
+						addUserInSession(loggedInUser, session); /* session logedin */
 						return "redirect:user/dashboard";
 					} else {
 						m.addAttribute("err", "Invalid USER ROLE");
@@ -46,7 +50,6 @@ public class UserController {
 					m.addAttribute("err", "logedInUser is NULL");
 					return "index";
 				}
-
 			}
 		} catch (UserBlockedException e) {
 			m.addAttribute("err", e.getMessage());
@@ -62,6 +65,12 @@ public class UserController {
 	@RequestMapping(value = { "/admin/dashboard" })
 	public String adminDashboard() {
 		return "dashboard_admin";
+	}
+
+	private void addUserInSession(User u, HttpSession session) {
+		session.setAttribute("user", u);
+		session.setAttribute("userId", u.getUserId());
+		session.setAttribute("role", u.getRole());
 	}
 
 }
