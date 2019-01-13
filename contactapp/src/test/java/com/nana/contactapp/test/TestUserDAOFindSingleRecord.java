@@ -24,6 +24,7 @@ public class TestUserDAOFindSingleRecord {
 			System.out.println(u.getPhone());
 			System.out.println(u.getEmail());
 			System.out.println(u.getAddress());
+			System.out.println(u.getRole());
 			System.out.println(u.getLoginStatus());
 			System.out.println();
 		}

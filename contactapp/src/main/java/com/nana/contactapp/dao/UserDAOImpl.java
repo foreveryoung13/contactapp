@@ -67,21 +67,22 @@ public class UserDAOImpl extends BaseDAO implements UserDAO {
 
 	@Override
 	public User findById(Integer userId) {
-		String sql = "SELECT userId, name, phone, email, address, loginName, loginStatus FROM user WHERE userId=?";
+		String sql = "SELECT userId, name, phone, email, address, loginName, role, loginStatus FROM user WHERE userId=?";
 		User u = getJdbcTemplate().queryForObject(sql, new UserRowMapper(), userId);
 		return u;
 	}
 
 	@Override
 	public List<User> findAll() {
-		String sql = "SELECT userId, name, phone, email, address, loginName, loginStatus FROM user";
+		String sql = "SELECT userId, name, phone, email, address, loginName, role, loginStatus FROM user";
 		List<User> users = getJdbcTemplate().query(sql, new UserRowMapper());
 		return users;
 	}
 
 	@Override
 	public List<User> findByProperty(String propName, Object propValue) {
-		String sql = "SELECT userId, name, phone, email, address, loginName, loginStatus FROM user WHERE " +propName+"=?";
+		String sql = "SELECT userId, name, phone, email, address, loginName, role, loginStatus FROM user WHERE "
+				+ propName + "=?";
 		List<User> users = getJdbcTemplate().query(sql, new UserRowMapper(), propValue);
 		return users;
 	}

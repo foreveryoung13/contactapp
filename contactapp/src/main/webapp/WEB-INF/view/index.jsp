@@ -23,7 +23,25 @@
 		<tr>
 			<td height="350px" valign="top">
 				<!-- Content -->
-				<h1>User Login</h1>
+				<h1>User Login</h1> 
+				<s:url var="url_login" value="/login" /> 
+				<f:form action="login" modelAttribute="command">
+						<table border="1">
+							<tr>
+								<td>Username</td>
+								<td><f:input path="loginName"/> </td>
+							</tr>
+							<tr>
+								<td>Password</td>
+								<td><f:input path="password" /> </td>
+							</tr>
+							<tr>
+								<td colspan="2" align="right">
+								<button>Login</button> 
+								<a href=""> New User Registration</a> </td>
+							</tr>
+						</table>
+				</f:form>
 			</td>
 		</tr>
 		<tr>
