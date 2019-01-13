@@ -25,7 +25,7 @@
 		<tr>
 			<td height="350px" valign="top">
 				<!-- Content -->
-				<h1>User Dashboard</h1>
+				<h1>Admin Dashboard</h1>
 			</td>
 		</tr>
 		<tr>
