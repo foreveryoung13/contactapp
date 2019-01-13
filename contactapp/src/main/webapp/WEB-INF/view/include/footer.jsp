@@ -1,0 +1,1 @@
+&copy; by Nana Febriana

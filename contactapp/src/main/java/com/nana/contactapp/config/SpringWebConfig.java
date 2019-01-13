@@ -15,8 +15,9 @@ import org.springframework.web.servlet.view.JstlView;
 @EnableWebMvc
 public class SpringWebConfig extends WebMvcConfigurerAdapter {
 
-	public void addResourceHandlerss(ResourceHandlerRegistry registry) {
-
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/static/**").addResourceLocations("/static/");
 	}
 
 	@Bean
