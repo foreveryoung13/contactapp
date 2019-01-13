@@ -6,9 +6,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ComponentScan(basePackages = { "com.nana.contactapp.dao" })
+@ComponentScan(basePackages = { "com.nana.contactapp.dao","com.nana.contactapp.services" })
 public class SpringRootConfig {
-	/* TODO: Services, DAO, DataSource, Email Sender or some other business layeer beans */
+	/* TODO: Services, DAO, DataSource, Email Sender or some other business layer beans */
 	
 	@Bean
 	public BasicDataSource getDataSource() {
