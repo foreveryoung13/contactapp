@@ -7,9 +7,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>User Login - Contact Application</title>
-<link href="static/css/style.css" rel="stylesheet" type="text/css" />
+<s:url var="url_css" value="/static/css/style.css" />
+<link href="${url_css}" rel="stylesheet" type="text/css" />
 </head>
-<body background="static/images/bg.jpg">
+<s:url var="url_bg" value="/static/images/bg.jpg" />
+<body background="${url_bg}">
 	<table border="1" width="80%" align="center">
 		<tr>
 			<td height="100px"><jsp:include page="include/header.jsp" /></td>
