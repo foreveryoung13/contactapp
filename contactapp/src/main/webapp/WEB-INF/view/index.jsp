@@ -23,9 +23,17 @@
 		<tr>
 			<td height="350px" valign="top">
 				<!-- Content -->
-				<h1>User Login</h1> <c:if test="${err!=null}">
+				<h1>User Login</h1> 
+				<c:if test="${err!=null}">
 					<p class="error">${err}</p>
-				</c:if> <s:url var="url_login" value="/login" /> <f:form action="login"
+				</c:if> 
+				<c:if test="${param.act eq 'lo'}">
+					<p class="success">Logout Successfully!</p>
+				</c:if> 
+				<c:if test="${param.act eq 'log'}">
+					<p class="error">Your not log in, login first please!</p>
+				</c:if> 
+				<s:url var="url_login" value="/login" /> <f:form action="login"
 					modelAttribute="command">
 					<table border="1">
 						<tr>

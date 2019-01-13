@@ -20,7 +20,7 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping(value = { "/", "/index" })
+	@RequestMapping(value = { "/", "/index", "/user", "/admin" })
 	public String index(Model m) {
 		m.addAttribute("command", new LoginCommand());
 		return "index";
@@ -34,7 +34,9 @@ public class UserController {
 			if (loggedInUser == null) {
 				m.addAttribute("err", "Login Failed Enter valid credentials.");
 				return "index";
+
 			} else {
+
 				if (loggedInUser.getRole() != null) {
 					if (loggedInUser.getRole().equals(UserService.ROLE_ADMIN)) {
 						addUserInSession(loggedInUser, session); /* session logedin */
@@ -57,14 +59,40 @@ public class UserController {
 		}
 	}
 
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String loginfirst(HttpSession session) {
+		session.invalidate();
+		return "redirect:index?act=log";
+	}
+
+	@RequestMapping(value = { "/logout" })
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:index?act=lo";
+	}
+
 	@RequestMapping(value = { "/user/dashboard" })
-	public String userDashboard() {
-		return "dashboard_user";
+	public String userDashboard(HttpSession session, Model m) {
+		m.addAttribute("command", new LoginCommand());
+
+		if (session.getAttribute("userId") != null) {
+			return "dashboard_user";
+		} else {
+			return "redirect:/login";
+		}
+
 	}
 
 	@RequestMapping(value = { "/admin/dashboard" })
-	public String adminDashboard() {
-		return "dashboard_admin";
+	public String adminDashboard(HttpSession session, Model m) {
+		m.addAttribute("command", new LoginCommand());
+
+		if (session.getAttribute("userId") != null) {
+			return "dashboard_admin";
+		} else {
+			return "redirect:/login";
+		}
+
 	}
 
 	private void addUserInSession(User u, HttpSession session) {
