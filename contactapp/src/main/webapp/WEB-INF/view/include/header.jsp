@@ -1,2 +1,1 @@
-
-<h1>Contact App - By Nana Febriana</h1>
+<h1>Contact App</h1>

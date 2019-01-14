@@ -1,5 +1,7 @@
 package com.nana.contactapp.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +45,11 @@ public class ContactController {
 	}
 
 	@RequestMapping(value = { "/user/clist" })
-	public String contactList(Model m) {
+	public String contactList(Model m, HttpSession session) {
+		Integer userId = (Integer) session.getAttribute("userId");
+		
+		List<Contact> contactList = contactService.findUserContact(userId);
+		m.addAttribute("contactList", contactList);
 		return "clist";
 	}
 

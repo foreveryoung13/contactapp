@@ -23,14 +23,39 @@
 		<tr>
 			<td height="350px" valign="top">
 				<!-- Content -->
-				<h1>User Login</h1> 
-				<c:if test="${err!=null}">
+				<h1>Contact List</h1> <c:if test="${err!=null}">
 					<p class="error">${err}</p>
-				</c:if> 
-				<c:if test="${param.act eq 'sv'}">
+				</c:if> <c:if test="${param.act eq 'sv'}">
 					<p class="success">Your save Contact Successfully!</p>
-				</c:if> 
-				 
+				</c:if>
+
+				<table border="1" cellpadding="3">
+					<tr>
+						<td>SR</td>
+						<td>CID</td>
+						<td>Name</td>
+						<td>Phone</td>
+						<td>Email</td>
+						<td>Address</td>
+						<td>Remark</td>
+						<td>Action</td>
+					</tr>
+					<c:forEach var="c" items="${contactList}" varStatus="st">
+						<tr>
+							<td>${st.count}</td>
+							<td>${c.contactId}</td>
+							<td>${c.name}</td>
+							<td>${c.phone}</td>
+							<td>${c.email}</td>
+							<td>${c.address}</td>
+							<td>${c.remark}</td>
+							<td>Edit or Delete</td>
+						</tr>
+
+					</c:forEach>
+
+				</table>
+
 			</td>
 		</tr>
 		<tr>
