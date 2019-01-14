@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.nana.contactapp.command.LoginCommand;
+import com.nana.contactapp.command.UserCommand;
 import com.nana.contactapp.domain.User;
 import com.nana.contactapp.exception.UserBlockedException;
 import com.nana.contactapp.services.UserService;
@@ -93,6 +94,22 @@ public class UserController {
 			return "redirect:/login";
 		}
 
+	}
+
+	@RequestMapping(value = { "/reg_form" })
+	public String registrationForm(Model m) {
+		UserCommand cmd = new UserCommand();
+		m.addAttribute("command", cmd);
+		return "reg_form";
+	}
+
+	@RequestMapping(value = { "/register" })
+	public String registerUser(@ModelAttribute("command") UserCommand cmd, Model m) {
+		User user = cmd.getUser();
+		user.setRole(UserService.ROLE_USER);
+		user.setLoginStatus(userService.LOGIN_STATUS_ACTIVE);
+		userService.register(user);
+		return "redirect:index?act=reg";
 	}
 
 	private void addUserInSession(User u, HttpSession session) {

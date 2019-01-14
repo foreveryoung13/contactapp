@@ -23,33 +23,38 @@
 		<tr>
 			<td height="350px" valign="top">
 				<!-- Content -->
-				<h1>User Login</h1> 
-				<c:if test="${err!=null}">
+				<h1>User Registration</h1> <c:if test="${err!=null}">
 					<p class="error">${err}</p>
-				</c:if> 
-				<c:if test="${param.act eq 'lo'}">
-					<p class="success">Logout Successfully!</p>
-				</c:if> 
-				<c:if test="${param.act eq 'log'}">
-					<p class="error">Your not log in, login first please!</p>
-				</c:if>
-				<c:if test="${param.act eq 'reg'}">
-					<p class="success">User Registered Successfully. Please Login !</p>
-				</c:if>  
-				<s:url var="url_login" value="/login" /> <f:form action="login"
-					modelAttribute="command">
+				</c:if> <s:url var="url_reg" value="/register" /> <f:form
+					action="${url_reg}" modelAttribute="command">
 					<table border="1">
 						<tr>
+							<td>Name</td>
+							<td><f:input path="user.name" /></td>
+						</tr>
+						<tr>
+							<td>Phone</td>
+							<td><f:input path="user.phone" /></td>
+						</tr>
+						<tr>
+							<td>Email</td>
+							<td><f:input path="user.email" /></td>
+						</tr>
+						<tr>
+							<td>Address</td>
+							<td><f:textarea path="user.address" /></td>
+						</tr>
+						<tr>
 							<td>Username</td>
-							<td><f:input path="loginName" /></td>
+							<td><f:input path="user.loginName" /></td>
 						</tr>
 						<tr>
 							<td>Password</td>
-							<td><f:password path="password" /></td>
+							<td><f:password path="user.password" /></td>
 						</tr>
 						<tr>
 							<td colspan="2" align="right">
-								<button>Login</button> <a href=""> New User Registration</a>
+								<button>Submit</button>
 							</td>
 						</tr>
 					</table>
