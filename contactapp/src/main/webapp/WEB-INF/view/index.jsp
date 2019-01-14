@@ -36,6 +36,19 @@
 				<c:if test="${param.act eq 'reg'}">
 					<p class="success">User Registered Successfully. Please Login !</p>
 				</c:if>  
+				
+				<c:choose>
+				  <c:when test="${sessionScope.userId!=null && sessionScope.role == 1}">
+				    <c:redirect url="/user/dashboard"/>
+				  </c:when>
+				  <c:when test="${sessionScope.userId!=null && sessionScope.role == 2}">
+				    <c:redirect url="/user/clist"/>
+				  </c:when>
+				  <c:otherwise>
+				    
+				  </c:otherwise>
+				</c:choose>
+				
 				<s:url var="url_login" value="/login" /> <f:form action="login"
 					modelAttribute="command">
 					<table border="1">
