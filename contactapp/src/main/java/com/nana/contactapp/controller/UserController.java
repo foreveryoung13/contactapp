@@ -3,6 +3,7 @@ package com.nana.contactapp.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -105,11 +106,19 @@ public class UserController {
 
 	@RequestMapping(value = { "/register" })
 	public String registerUser(@ModelAttribute("command") UserCommand cmd, Model m) {
-		User user = cmd.getUser();
-		user.setRole(UserService.ROLE_USER);
-		user.setLoginStatus(userService.LOGIN_STATUS_ACTIVE);
-		userService.register(user);
-		return "redirect:index?act=reg";
+		try {
+			User user = cmd.getUser();
+			user.setRole(UserService.ROLE_USER);
+			user.setLoginStatus(userService.LOGIN_STATUS_ACTIVE);
+			userService.register(user);
+			return "redirect:index?act=reg";
+		} catch (DuplicateKeyException e) {
+			e.printStackTrace();
+			m.addAttribute("err","Username is already registered. please select another username");
+			return "reg_form";
+		}
+		
+		
 	}
 
 	private void addUserInSession(User u, HttpSession session) {
