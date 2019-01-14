@@ -3,6 +3,7 @@ package com.nana.contactapp.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.nana.contactapp.dao.BaseDAO;
 import com.nana.contactapp.dao.ContactDAO;
@@ -10,6 +11,7 @@ import com.nana.contactapp.domain.Contact;
 import com.nana.contactapp.rm.ContactRowMapper;
 import com.nana.contactapp.util.StringUtil;
 
+@Service
 public class ContactServiceImpl extends BaseDAO implements ContactService {
 
 	@Autowired
