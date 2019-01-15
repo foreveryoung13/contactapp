@@ -42,7 +42,7 @@
 				</c:if>
 				
 				<form action="<s:url value="/user/contact_search"/>">
-					<input type="text" name="freeText" placeholder="Enter Text To Search">
+					<input type="text" name="freeText" value="${param.freeText}" placeholder="Enter Text To Search">
 					<button>Find</button>
 				</form>
 				<br/>
