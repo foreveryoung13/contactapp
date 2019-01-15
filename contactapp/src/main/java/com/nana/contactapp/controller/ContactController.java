@@ -62,7 +62,7 @@ public class ContactController {
 				if (aContactId != null) {
 					c.setContactId(aContactId);
 					contactService.update(c);
-				    session.removeAttribute("aContactId");
+					session.removeAttribute("aContactId");
 					return "redirect:clist?act=ed";
 				}
 			} catch (Exception e) {
@@ -80,6 +80,20 @@ public class ContactController {
 
 		List<Contact> contactList = contactService.findUserContact(userId);
 		m.addAttribute("contactList", contactList);
+		return "clist";
+	}
+
+	@RequestMapping(value = { "/user/contact_search" })
+	public String contactSearch(Model m, HttpSession session, @RequestParam("freeText") String freeText) {
+		Integer userId = (Integer) session.getAttribute("userId");
+		List<Contact> contactList = contactService.findUserContact(userId, freeText);
+		
+		if (contactList != null && contactList.size() > 0) {
+			m.addAttribute("contactList", contactList);
+		} else {
+			m.addAttribute("err", "can't find contact list");
+		}
+
 		return "clist";
 	}
 
