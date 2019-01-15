@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.nana.contactapp.domain.Contact;
 import com.nana.contactapp.services.ContactService;
@@ -51,6 +52,12 @@ public class ContactController {
 		List<Contact> contactList = contactService.findUserContact(userId);
 		m.addAttribute("contactList", contactList);
 		return "clist";
+	}
+	
+	@RequestMapping(value = { "/user/del_contact" })
+	public String deleteContact(@RequestParam("cid") Integer contactId) {
+		contactService.delete(contactId);
+		return "redirect:clist?act=del";
 	}
 
 }

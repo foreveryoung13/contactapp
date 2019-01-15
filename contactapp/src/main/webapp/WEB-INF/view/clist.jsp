@@ -23,22 +23,36 @@
 		<tr>
 			<td height="350px" valign="top">
 				<!-- Content -->
-				<h1>Contact List</h1> <c:if test="${err!=null}">
+				<h1>Contact List</h1>
+				 
+				<c:if test="${err!=null}">
 					<p class="error">${err}</p>
-				</c:if> <c:if test="${param.act eq 'sv'}">
+				</c:if> 
+				
+				<c:if test="${param.act eq 'sv'}">
 					<p class="success">Your save Contact Successfully!</p>
+				</c:if>
+				
+				<c:if test="${param.act eq 'del'}">
+					<p class="success">Your delete Contact Successfully!</p>
 				</c:if>
 
 				<table border="1" cellpadding="3">
+					<c:if test="${empty contactList}">
+						<tr>
+							<td align="center" colspan="8" class="error">No Records
+								Present</td>
+						</tr>
+					</c:if>
 					<tr>
-						<td>SR</td>
-						<td>CID</td>
-						<td>Name</td>
-						<td>Phone</td>
-						<td>Email</td>
-						<td>Address</td>
-						<td>Remark</td>
-						<td>Action</td>
+						<th>SR</th>
+						<th>CID</th>
+						<th>Name</th>
+						<th>Phone</th>
+						<th>Email</th>
+						<th>Address</th>
+						<th>Remark</th>
+						<th>Action</th>
 					</tr>
 					<c:forEach var="c" items="${contactList}" varStatus="st">
 						<tr>
@@ -49,13 +63,13 @@
 							<td>${c.email}</td>
 							<td>${c.address}</td>
 							<td>${c.remark}</td>
-							<td>Edit or Delete</td>
+							<s:url var="url_del" value="/user/del_contact">
+								<s:param name="cid" value="${c.contactId}"/>
+							</s:url>
+							<td><a href="">Edit</a> | <a href="${url_del}">Delete</a></td>
 						</tr>
-
 					</c:forEach>
-
 				</table>
-
 			</td>
 		</tr>
 		<tr>
