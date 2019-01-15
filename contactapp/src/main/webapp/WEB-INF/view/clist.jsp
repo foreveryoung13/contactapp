@@ -30,11 +30,15 @@
 				</c:if> 
 				
 				<c:if test="${param.act eq 'sv'}">
-					<p class="success">Your save Contact Successfully!</p>
+					<p class="success">Your Save Contact Successfully!</p>
+				</c:if>
+				
+				<c:if test="${param.act eq 'ed'}">
+					<p class="success">Your Edit Contact Successfully!</p>
 				</c:if>
 				
 				<c:if test="${param.act eq 'del'}">
-					<p class="success">Your delete Contact Successfully!</p>
+					<p class="success">Your Delete Contact Successfully!</p>
 				</c:if>
 
 				<table border="1" cellpadding="3">
@@ -66,7 +70,10 @@
 							<s:url var="url_del" value="/user/del_contact">
 								<s:param name="cid" value="${c.contactId}"/>
 							</s:url>
-							<td><a href="">Edit</a> | <a href="${url_del}">Delete</a></td>
+							<s:url var="url_edit" value="/user/edit_contact">
+								<s:param name="cid" value="${c.contactId}"/>
+							</s:url>
+							<td><a href="${url_edit}">Edit</a> | <a href="${url_del}">Delete</a></td>
 						</tr>
 					</c:forEach>
 				</table>
