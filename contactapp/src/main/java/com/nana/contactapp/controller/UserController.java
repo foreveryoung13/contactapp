@@ -114,17 +114,22 @@ public class UserController {
 			return "redirect:index?act=reg";
 		} catch (DuplicateKeyException e) {
 			e.printStackTrace();
-			m.addAttribute("err","Username is already registered. please select another username");
+			m.addAttribute("err", "Username is already registered. please select another username");
 			return "reg_form";
 		}
-		
-		
+
 	}
 
 	private void addUserInSession(User u, HttpSession session) {
 		session.setAttribute("user", u);
 		session.setAttribute("userId", u.getUserId());
 		session.setAttribute("role", u.getRole());
+	}
+
+	@RequestMapping(value = "/admin/users")
+	public String getUserList(Model m) {
+		m.addAttribute("userList", userService.getUserList());
+		return "users"; // JSP
 	}
 
 }
