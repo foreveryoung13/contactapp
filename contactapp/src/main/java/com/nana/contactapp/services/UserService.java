@@ -17,5 +17,5 @@ public interface UserService {
 	public User login(String loginName, String password) throws UserBlockedException;
 	public List<User> getUserList();
 	public void changeLoginStatus(Integer userId, Integer status);
-	
+	public Boolean isUsernameExist(String username);
 }

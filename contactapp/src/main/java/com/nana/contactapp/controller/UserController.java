@@ -165,4 +165,14 @@ public class UserController {
 		}
 	}
 
+	@RequestMapping(value = "/check_avail")
+	@ResponseBody
+	public String checkAvailability(@RequestParam String username) {
+		if (userService.isUsernameExist(username)) {
+			return "This username is already taken. Choose another name";
+		} else {
+			return "Yes! You can take this";
+		}
+	}
+
 }
