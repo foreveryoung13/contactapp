@@ -1,5 +1,8 @@
 package com.nana.contactapp.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.nana.contactapp.command.LoginCommand;
 import com.nana.contactapp.command.UserCommand;
@@ -38,7 +43,7 @@ public class UserController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String handleLogin(@ModelAttribute("command") LoginCommand command, Model m, HttpSession session) {
-		
+
 		try {
 			User loggedInUser = userService.login(command.getLoginName(), command.getPassword());
 
@@ -64,7 +69,7 @@ public class UserController {
 					return "index";
 				}
 			}
-			
+
 		} catch (UserBlockedException e) {
 			m.addAttribute("err", e.getMessage());
 			return "index";
@@ -145,6 +150,18 @@ public class UserController {
 			return "users";
 		} else {
 			return "redirect:/login";
+		}
+	}
+
+	@RequestMapping(value = "/admin/change_status")
+	@ResponseBody
+	public String changeLoginStatus(@RequestParam Integer userId, @RequestParam Integer loginStatus) {
+		try {
+			userService.changeLoginStatus(userId, loginStatus);
+			return "SUCCESS: Status Changed";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "ERROR: Unable to Change Status";
 		}
 	}
 

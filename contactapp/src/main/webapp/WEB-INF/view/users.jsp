@@ -7,8 +7,25 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>User List - Contact Application</title>
+
 <s:url var="url_css" value="/static/css/style.css" />
 <link href="${url_css}" rel="stylesheet" type="text/css" />
+<s:url var="url_jqlib" value="/static/js/jquery-3.2.1.min.js" />
+<script type="text/javascript" src="${url_jqlib}"></script>
+<script type="text/javascript">
+	function changeStatus(uid, lstatus){
+	<!-- alert(userId+", "+loginStatus); -->
+		$.ajax({
+			url: 'change_status',
+			data: {userId:uid, loginStatus:lstatus}, 
+			success: function(data){
+				alert(data);	
+			}
+		});
+	}
+	
+</script>
+
 </head>
 <s:url var="url_bg" value="/static/images/bg.jpg" />
 <body background="${url_bg}">
@@ -23,7 +40,7 @@
 		<tr>
 			<td height="350px" valign="top">
 				<!-- Content -->
-				<h1>Contact List</h1> <c:if test="${err!=null}">
+				<h1>User List</h1> <c:if test="${err!=null}">
 					<p class="error">${err}</p>
 				</c:if> <c:if test="${param.act eq 'sv'}">
 					<p class="success">Your Save Contact Successfully!</p>
@@ -36,7 +53,7 @@
 				<table border="1" cellpadding="3">
 					<tr>
 						<th>SR</th>
-						<th>UID</th>
+						<th>User ID</th>
 						<th>Name</th>
 						<th>Phone</th>
 						<th>Email</th>
@@ -53,10 +70,14 @@
 							<td>${u.email}</td>
 							<td>${u.address}</td>
 							<td>${u.loginName}</td>
-							<td><select id="id_${u.userId}">
+							<td><select id="id_${u.userId}" onchange="changeStatus(${u.userId}, $(this).val())">
 									<option value="1">Active</option>
 									<option value="2">Block</option>
-							</select></td>
+							</select>
+							<script type="text/javascript">
+								$('#id_${u.userId}').val(${u.loginStatus});
+							</script>
+							</td>
 						</tr>
 					</c:forEach>
 				</table>
@@ -64,7 +85,9 @@
 		</tr>
 		<tr>
 			<td height="25px">
-				<!-- Footer --> <jsp:include page="include/footer.jsp" /></td>
+				<!-- Footer --> 
+				<jsp:include page="include/footer.jsp" />
+			</td>
 		</tr>
 	</table>
 </body>
