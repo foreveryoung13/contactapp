@@ -11,7 +11,10 @@
 </c:if>
 
 <c:if test="${sessionScope.userId!=null && sessionScope.role == 1}">
-	<a href="#">Home</a> | <a href="#">User List</a> | <a
+	<s:url var="url_ulist" value="/admin/users" />
+	<s:url var="url_ahome" value="/admin/dashboard" />
+
+	<a href="${url_ahome}">Home</a> | <a href="${url_ulist}">User List</a> | <a
 		href="${url_logout}">Logout</a>
 </c:if>
 

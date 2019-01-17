@@ -23,13 +23,22 @@ public class UserController {
 	private UserService userService;
 
 	@RequestMapping(value = { "/", "/index", "/user", "/admin" })
-	public String index(Model m) {
+	public String index(Model m, HttpSession session) {
 		m.addAttribute("command", new LoginCommand());
+
+		if (session.getAttribute("userId") != null) {
+			if (session.getAttribute("userId").equals(UserService.ROLE_ADMIN)) {
+				return "redirect:admin/dashboard";
+			} else if (session.getAttribute("userId").equals(UserService.ROLE_USER)) {
+				return "redirect:user/dashboard";
+			}
+		}
 		return "index";
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String handleLogin(@ModelAttribute("command") LoginCommand command, Model m, HttpSession session) {
+		
 		try {
 			User loggedInUser = userService.login(command.getLoginName(), command.getPassword());
 
@@ -55,6 +64,7 @@ public class UserController {
 					return "index";
 				}
 			}
+			
 		} catch (UserBlockedException e) {
 			m.addAttribute("err", e.getMessage());
 			return "index";
@@ -127,9 +137,15 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/admin/users")
-	public String getUserList(Model m) {
-		m.addAttribute("userList", userService.getUserList());
-		return "users"; // JSP
+	public String getUserList(Model m, HttpSession session) {
+		m.addAttribute("command", new LoginCommand());
+
+		if (session.getAttribute("userId") != null) {
+			m.addAttribute("userList", userService.getUserList());
+			return "users";
+		} else {
+			return "redirect:/login";
+		}
 	}
 
 }
