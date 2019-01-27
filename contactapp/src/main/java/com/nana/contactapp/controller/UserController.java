@@ -169,7 +169,7 @@ public class UserController {
 	@ResponseBody
 	public String checkAvailability(@RequestParam String username) {
 		if (userService.isUsernameExist(username)) {
-			return "This username is already taken. Choose another name";
+			return "This username is already taken.";
 		} else {
 			return "Yes! You can take this";
 		}
