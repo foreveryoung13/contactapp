@@ -58,15 +58,7 @@
 									<f:input path="user.phone" cssClass="form-control"
 										autocomplete="off" />
 								</div>
-							</div>
-							<div class="form-group row" id="form-group-custom">
-								<label for="email" class="col-sm-4 control-label labelname">
-									Email </label>
-								<div class="col-sm-6">
-									<f:input path="user.email" cssClass="form-control"
-										autocomplete="off" />
-								</div>
-							</div>
+							</div>							
 							<div class="form-group row" id="form-group-custom">
 								<label for="address" class="col-sm-4 control-label labelname">
 									Address </label>
@@ -98,6 +90,14 @@
 									password </label>
 								<div class="col-sm-6 input-group">
 									<f:password path="user.password" cssClass="form-control"
+										autocomplete="off" />
+								</div>
+							</div>
+							<div class="form-group row" id="form-group-custom">
+								<label for="email" class="col-sm-4 control-label labelname">
+									Email </label>
+								<div class="col-sm-6 input-group">
+									<f:input path="user.email" cssClass="form-control"
 										autocomplete="off" />
 								</div>
 							</div>
