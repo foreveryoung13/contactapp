@@ -18,6 +18,8 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/static/**").addResourceLocations("/static/");
+		registry.addResourceHandler("/webjars/**").addResourceLocations("/webjars/");
+		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/").setCachePeriod(31556926);
 	}
 
 	@Bean

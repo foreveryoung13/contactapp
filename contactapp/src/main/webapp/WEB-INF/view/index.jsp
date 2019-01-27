@@ -6,6 +6,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="${pageContext.request.contextPath}/webjars/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
 <title>User Login - Contact Application</title>
 <s:url var="url_css" value="/static/css/style.css" />
 <link href="${url_css}" rel="stylesheet" type="text/css" />
@@ -63,7 +65,7 @@
 						<tr>
 							<td colspan="2" align="right">
 								<s:url var="url_reg_form" value="/reg_form" />
-								<button>Login</button> <a href="${url_reg_form}"> New User Registration</a>
+								<button class="btn btn-primary">Login</button> <a href="${url_reg_form}"> New User Registration</a>
 							</td>
 						</tr>
 					</table>
