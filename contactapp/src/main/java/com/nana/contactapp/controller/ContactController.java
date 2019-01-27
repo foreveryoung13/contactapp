@@ -1,5 +1,7 @@
 package com.nana.contactapp.controller;
 
+import org.apache.log4j.Logger;
+
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -17,11 +19,14 @@ import com.nana.contactapp.services.ContactService;
 @Controller
 public class ContactController {
 
+	final static Logger logger = Logger.getLogger(ContactController.class);
+	
 	@Autowired
 	private ContactService contactService;
 
 	@RequestMapping(value = { "/user/contact_form" })
 	public String contactForm(Model m) {
+		logger.info("----------------------------------------------------------------");
 		Contact contact = new Contact();
 		m.addAttribute("command", contact);
 		return "contact_form";
