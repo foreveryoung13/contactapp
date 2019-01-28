@@ -8,31 +8,38 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>User Dashboard - Contact Application</title>
+
+<!-- Bootstrap Configuration -->
+<link
+	href="${pageContext.request.contextPath}/webjars/bootstrap/3.3.6/css/bootstrap.min.css"
+	rel="stylesheet">
+
 <s:url var="url_css" value="/static/css/style.css" />
 <link href="${url_css}" rel="stylesheet" type="text/css" />
 </head>
-<s:url var="url_bg" value="/static/images/bg.jpg" />
+<s:url var="url_bg" value="" />
 <body background="${url_bg}">
-	<table border="1" width="80%" align="center">
-		<tr>
-			<td height="100px"><jsp:include page="include/header.jsp" /></td>
-		</tr>
-		<tr>
-			<td height="25px">
-				<!-- Menu --> <jsp:include page="include/menu.jsp" /></td>
-			</td>
-		</tr>
-		<tr>
-			<td height="350px" valign="top">
-				<!-- Content -->
-				<h1>User Dashboard</h1>
-			</td>
-		</tr>
-		<tr>
-			<td height="25px">
-				<!-- Footer --> <jsp:include page="include/footer.jsp" /></td>
-			</td>
-		</tr>
-	</table>
+
+	<div class="container">
+		<div style="height: 100px">
+			<jsp:include page="include/header.jsp" />
+		</div>
+
+		<div style="height: 25px; margin-bottom: 55px; margin-top: -30px;">
+			<jsp:include page="include/menu.jsp" />
+		</div>
+
+		<div style="height: 350px;">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<h2 class="panel-title">User Dashboard</h2>
+				</div>
+			</div>
+		</div>
+		<div style="height: 25px">
+			<jsp:include page="include/footer.jsp" />
+		</div>
+	</div>
+
 </body>
 </html>
