@@ -28,61 +28,70 @@
 		</div>
 
 		<div style="height: 350px;">
-			<div class="col-6 offset-3 align-self-center">
-				<div class="card">
-					<div class="panel panel-info">
-						<div class="panel-heading">
-							<h2 class="panel-title">Login</h2>
-						</div>
-
-						<c:if test="${err!=null}">
-							<p class="error">${err}</p>
-						</c:if>
-						<c:if test="${param.act eq 'lo'}">
-							<p class="success">Logout Successfully!</p>
-						</c:if>
-						<c:if test="${param.act eq 'log'}">
-							<p class="error">Your not log in, login first please!</p>
-						</c:if>
-						<c:if test="${param.act eq 'reg'}">
-							<p class="success">User Registered Successfully. Please Login
-								!</p>
-						</c:if>
-						<c:choose>
-							<c:when
-								test="${sessionScope.userId!=null && sessionScope.role == 1}">
-								<c:redirect url="/user/dashboard" />
-							</c:when>
-							<c:when
-								test="${sessionScope.userId!=null && sessionScope.role == 2}">
-								<c:redirect url="/user/clist" />
-							</c:when>
-							<c:otherwise>
-							</c:otherwise>
-						</c:choose>
-
-						<s:url var="url_login" value="/login" />
-						<f:form action="login" modelAttribute="command">
-							<div class="form-group">
-								<label for="Username" style="font-size: 12px;">User Name</label>
-								<f:input path="loginName" class="form-control"
-									placeholder="Username" name="username" autocomplete="off" />
-							</div>
-							<div class="form-group" style="margin-top: -15px;">
-								<label for="Password" style="font-size: 12px;">Password</label>
-								<f:password path="password" class="form-control"
-									placeholder="Password" name="password" />
-							</div>
-
-							<input type="submit" value="Login" name="submit"
-								class="btn btn-primary" />
-							<s:url var="url_reg_form" value="/reg_form" />
-							<a href="${url_reg_form}"> New user registration</a>
-						</f:form>
-
-					</div>
+			<!-- <div class="col-6 offset-3 align-self-center">-->
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<h2 class="panel-title">Login</h2>
 				</div>
+
+				<c:if test="${err!=null}">
+					<p class="error">${err}</p>
+				</c:if>
+				<c:if test="${param.act eq 'lo'}">
+					<p class="success">Logout Successfully!</p>
+				</c:if>
+				<c:if test="${param.act eq 'log'}">
+					<p class="error">Your not log in, login first please!</p>
+				</c:if>
+				<c:if test="${param.act eq 'reg'}">
+					<p class="success">User Registered Successfully. Please Login !</p>
+				</c:if>
+				<c:choose>
+					<c:when
+						test="${sessionScope.userId!=null && sessionScope.role == 1}">
+						<c:redirect url="/user/dashboard" />
+					</c:when>
+					<c:when
+						test="${sessionScope.userId!=null && sessionScope.role == 2}">
+						<c:redirect url="/user/clist" />
+					</c:when>
+					<c:otherwise>
+					</c:otherwise>
+				</c:choose>
+
+				<s:url var="url_login" value="/login" />
+				<f:form action="login" modelAttribute="command">
+					<div class="form-group form-group-sm">
+						<div class="col-sm-6">
+							<div class="form-group row" id="form-group-custom">
+								<label for="phone" class="col-sm-4 control-label labelname">User
+									Name</label>
+								<div class="col-sm-6">
+									<f:input path="loginName" class="form-control"
+										placeholder="Username" name="username" autocomplete="off" />
+								</div>
+							</div>
+							<div class="form-group row" id="form-group-custom">
+								<label for="phone" class="col-sm-4 control-label labelname">Password</label>
+								<div class="col-sm-6">
+									<f:password path="password" class="form-control"
+										placeholder="Password" name="password" />
+								</div>
+							</div>
+							<div class="form-group row" id="form-group-custom">
+								<label for="" class="col-sm-4 control-label labelname"></label>
+								<div class="col-sm-6">
+									<input type="submit" value="Login" name="submit"
+										class="btn btn-primary" />
+									<s:url var="url_reg_form" value="/reg_form" />
+									<a href="${url_reg_form}"> New user registration</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</f:form>
 			</div>
+			<!-- </div> -->
 		</div>
 
 		<div style="height: 25px">
